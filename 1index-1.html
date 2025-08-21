@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metanoia – Swipe Your Way to Your Dream Job</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    :root {
+      --primary: #2A2F4F;
+      --secondary: #917FB3;
+      --text: #FFFFFF;
+      --text-dark: #181b2a;
+      --bg-light: #F5F5F5;
+      --bg-dark: #2A2F4F;
+      --swipe-mission-bg: linear-gradient(135deg, #181b2a 0%, #917FB3 100%);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg-dark);
+    }
+    .metanoia-brand {
+      position: absolute;
+      top: 1.5rem;
+      left: 2rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary);
+      letter-spacing: 1px;
+      user-select: none;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @media screen and (max-width: 768px) {
+      .metanoia-brand {
+        font-size: 1.2rem;
+        left: 1rem;
+        top: 0.7rem;
+      }
+    }
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      color: white;
+      transition: filter 0.5s;
+      will-change: filter;
+    }
+    .hero.blurred {
+      filter: blur(12px) grayscale(70%) brightness(0.8);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-content {
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+    }
+    .main-content {
+      padding: 6% 5%;
+    }
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .hero-content {
+        max-width: 100%;
+        padding: 0 1rem;
+      }
+      .feature-card {
+        padding: 1.5rem;
+      }
+      .process-steps {
+        padding: 1.5rem;
+      }
+    }
+    @media screen and (min-width: 1440px) {
+      .main-content {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .hero-content {
+        max-width: 800px;
+      }
+      h1 {
+        font-size: 4rem;
+      }
+    }
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      background: linear-gradient(120deg, rgba(74, 144, 226, 0.05), rgba(128, 90, 213, 0.05));
+    }
+    .feature-card:active {
+      transform: translateY(0px);
+    }
+    .feature-title {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .feature-text {
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-card {
+      background: white;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      background: var(--primary);
+      color: white;
+    }
+    .feature-card:hover .feature-title,
+    .feature-card:hover .feature-text {
+      color: white;
+    }
+    .process-steps {
+      color: var(--text-dark);
+      background: white;
+    }
+    .step {
+      color: var(--text-dark);
+    }
+    .process-steps {
+      margin-top: 4rem;
+      padding: 3rem;
+      background: var(--bg-light);
+      border-radius: 20px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .step-number {
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-weight: bold;
+    }
+    .highlight-box {
+      background: linear-gradient(120deg, rgba(74, 144, 226, 0.1), rgba(128, 90, 213, 0.1));
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+      border-left: 4px solid var(--primary);
+    }
+    /* SWIPEABLE PAGES - Responsive and animated */
+    .swipe-page {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--swipe-mission-bg);
+      color: var(--text-dark);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      transition: transform 0.45s cubic-bezier(.23,1.06,.66,.96), opacity 0.35s, background 0.5s;
+      will-change: transform, opacity;
+      opacity: 0;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+    .swipe-page.active {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: all;
+      z-index: 1101;
+      animation: swipeIn 0.8s cubic-bezier(.23,1.06,.66,.96);
+    }
+    .swipe-page.left {
+      transform: translateX(-100vw);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1100;
+    }
+    .swipe-page.right {
+      transform: translateX(100vw);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1100;
+    }
+    @keyframes swipeIn {
+      0% { opacity:0; transform:translateY(30px) scale(0.98);}
+      60% { opacity:1; transform:translateY(-10px) scale(1.03);}
+      100% { opacity:1; transform:translateY(0) scale(1);}
+    }
+    .swipe-content {
+      max-width: 680px;
+      width: 92vw;
+      margin: 6.5rem auto 0 auto;
+      background: #fff;
+      color: #181b2a;
+      box-shadow: 0 10px 24px rgba(42,47,79,0.09);
+      border-radius: 22px;
+      padding: 2.5rem 2.2rem 2.1rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInContent 1.1s cubic-bezier(.23,1.06,.66,.96);
+    }
+    @media (max-width: 900px) {
+      .swipe-content {
+        max-width: 98vw;
+        padding: 1.3rem 0.8rem 1.2rem 0.8rem;
+        margin-top: 4.5rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .swipe-content {
+        max-width: 100vw;
+        border-radius: 0;
+        margin-top: 3.4rem;
+        padding: 1.1rem 0.15rem 1rem 0.15rem;
+      }
+    }
+    @keyframes fadeInContent {
+      from { opacity:0; transform:translateY(36px);}
+      to { opacity:1; transform:translateY(0);}
+    }
+    .swipe-content h2 {
+      color: #2A2F4F;
+      font-size: 2.35rem;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+      animation: fadeInText 1.2s cubic-bezier(.23,1.06,.66,.96);
+    }
+    .swipe-content h3 {
+      color: #917FB3;
+      font-size: 1.19rem;
+      margin-top: 1.7rem;
+      margin-bottom: 0.6rem;
+      text-align: left;
+      width: 100%;
+      font-weight: 600;
+      animation: fadeInText 1.4s cubic-bezier(.23,1.06,.66,.96);
+    }
+    @keyframes fadeInText {
+      from { opacity:0; transform:translateY(25px);}
+      to { opacity:1; transform:translateY(0);}
+    }
+    .swipe-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      text-align: left;
+      width: 100%;
+    }
+    .swipe-list li {
+      padding: 0.8rem 0 0.8rem 2rem;
+      position: relative;
+      color: #2A2F4F;
+      font-size: 1.06rem;
+    }
+    .swipe-list li:before {
+      content: "•";
+      color: #917FB3;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .swipe-indicator {
+      margin: 1.5rem auto 0 auto;
+      background: #eceafe;
+      color: #2A2F4F;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+      width: max-content;
+      animation: fadeInIndicator 1.5s cubic-bezier(.23,1.06,.66,.96);
+    }
+    @keyframes fadeInIndicator {
+      from { opacity:0; transform:scale(0.7);}
+      to { opacity:1; transform:scale(1);}
+    }
+    /* SHADING for Mission/Impact description box - high contrast */
+    .shaded-desc-box {
+      background: linear-gradient(120deg, #f7f7ff 85%, #e1d6f6 100%);
+      color: #1a1733;
+      border-radius: 14px;
+      box-shadow: 0 2px 18px 0 rgba(42, 47, 79, 0.06);
+      padding: 1.7rem 1.3rem 1.3rem 1.3rem;
+      margin: 1.4rem auto 2.1rem auto;
+      font-size: 1.18rem;
+      max-width: 97%;
+      text-align: left;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-left: 5px solid #917FB3;
+      animation: fadeInBox 1.2s cubic-bezier(.23,1.06,.66,.96);
+    }
+    @keyframes fadeInBox {
+      from { opacity:0; transform:translateY(20px);}
+      to { opacity:1; transform:translateY(0);}
+    }
+    /* ORIGINAL ANIMATIONS */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    .loading-content {
+      text-align: center;
+    }
+    .loading-content h1 {
+      color: white;
+      font-size: 4rem;
+      opacity: 0;
+      animation: expandText 3s ease-in-out forwards;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      letter-spacing: 2px;
+    }
+    @keyframes expandText {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.8);
+        filter: blur(10px);
+        letter-spacing: 2px;
+      }
+      20% { 
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+        letter-spacing: 2px;
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1.1);
+        letter-spacing: 8px;
+        filter: blur(0);
+      }
+      100% { 
+        opacity: 0;
+        transform: scale(1.2);
+        letter-spacing: 12px;
+        filter: blur(8px);
+      }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="metanoia-brand">Metanoia</div>
+  <!-- Original loading animation, DO NOT EDIT OR REMOVE -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <h1>Metanoia</h1>
+    </div>
+  </div>
+  <!-- Main page -->
+  <div class="hero" id="hero-section">
+    <div class="hero-content">
+      <h1>Swipe. Match. Get Shortlisted.</h1>
+      <p>Metanoia brings the swiping experience to the professional world. Build real connections — not just resumes.</p>
+      <button class="button" id="see-how-btn">See How It Works</button>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="section">
+      <div class="highlight-box">
+        <h2>Why Metanoia is Different</h2>
+        <p>No more endless job searches. We've replaced traditional job hunting with an intuitive swiping experience that connects job seekers directly with hiring managers.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3 class="feature-title">Smart Matching</h3>
+          <p class="feature-text">Both hiring managers and candidates create profiles, ensuring every swipe leads to meaningful connections based on mutual interest.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">Referrals Request</h3>
+          <p class="feature-text">Ask for referrals directly after matching — unlock hidden job opportunities quickly.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">Automated Scheduling</h3>
+          <p class="feature-text">Once matched, our smart calendar automatically finds the perfect interview time that works for both parties.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="feature-title">Location-Smart</h3>
+          <p class="feature-text">Find opportunities at your preferred locations without endless searching - just swipe and match.</p>
+        </div>
+        <div class="feature-card zizz-mode">
+          <h3 class="feature-title">Zizz Mode</h3>
+          <p class="feature-text">Hiring managers can pause their profile when positions are filled and reactivate when new opportunities arise.</p>
+          <div class="zizz-toggle">
+            <label class="switch">
+              <input type="checkbox" onchange="toggleZizzMode(this)">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="process-steps" id="how-metanoia-works">
+        <h2>How Metanoia Works</h2>
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Create your profile and set your preferences</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Swipe through curated job matches</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Get matched and instantly schedule interviews</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div>Connect for referrals and land your dream job</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SWIPEABLE PAGES (Hidden by default, only swipe to show) -->
+  <!-- Mission Page: first swipe left -->
+  <div class="swipe-page right" id="swipe-mission">
+    <div class="swipe-content">
+      <h2>Our Mission</h2>
+      <div class="shaded-desc-box">
+        <p>
+          At Metanoia, our mission is to transform the professional journey. We’re dedicated to turning the job search into a seamless, human-centered experience that creates real opportunities for growth and impact.
+        </p>
+      </div>
+      <div>
+        <h3>What Drives Us</h3>
+        <ul class="swipe-list">
+          <li>Putting people first: enabling authentic, meaningful connections</li>
+          <li>Innovating for simplicity: making hiring fast, friendly, and fair</li>
+          <li>Championing equity: leveling the playing field for every talent</li>
+          <li>Fostering openness: building trust through transparency</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Our Vision</h3>
+        <p>
+          We imagine a world where discovering your dream job is as intuitive as meeting your perfect match—and where your true potential shines beyond any resume.
+        </p>
+      </div>
+      <div class="swipe-indicator" style="margin-top:2rem;">👈 👉</div>
+    </div>
+  </div>
+  <!-- Impact Page: second swipe left -->
+  <div class="swipe-page right" id="swipe-impact">
+    <div class="swipe-content">
+      <h2>Our Impact</h2>
+      <div class="shaded-desc-box">
+        <p>
+          Metanoia is redefining how talent and opportunity come together for a new generation. As Gen Z and Gen Alpha are raised on swipe-based dating apps, Metanoia harnesses that familiar, addictive interaction — but for career growth, not romance. We empower young professionals to swipe their way into futures that inspire them, making job discovery as intuitive and rewarding as social connection.
+        </p>
+      </div>
+      <div>
+        <h3>How We'll Impact the Next Generation</h3>
+        <ul class="swipe-list">
+          <li>Transforms career search into a fun, swipeable experience — not a chore</li>
+          <li>Bridges the gap between digital-native generations and employers</li>
+          <li>Enables meaningful networking over meaningless scrolling</li>
+          <li>Inspires young talent to view job discovery as exciting, not exhausting</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Success Stories of Tomorrow</h3>
+        <p>
+          Imagine a future where every swipe is a spark: students landing internships, young professionals finding mentors, and dream teams forming from shared passions — all with a swipe. Metanoia is the bridge from digital habit to professional growth for an entire generation.
+        </p>
+      </div>
+      <div class="swipe-indicator" style="margin-top:2rem;">👉</div>
+    </div>
+  </div>
+  <script>
+    // Loading screen handler (original, DO NOT EDIT OR REMOVE)
+    window.addEventListener('load', () => {
+      const loadingScreen = document.getElementById('loading-screen');
+      setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 3000);
+    });
+    // Intersection Observer for fade-in animations (original, DO NOT EDIT OR REMOVE)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.feature-card, .step, .highlight-box').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 100);
+      });
+    });
+    function toggleZizzMode(checkbox) {
+      const status = checkbox.checked ? "enabled" : "disabled";
+      alert(`Zizz Mode is now ${status}`);
+    }
+    // "See How It Works" button smooth scroll to How Metanoia Works (last topic)
+    document.getElementById('see-how-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.getElementById('how-metanoia-works');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+    // SWIPE LOGIC
+    // 0 = main, 1 = mission, 2 = impact
+    const swipePages = [
+      null, // main page (not a swipe-page)
+      document.getElementById('swipe-mission'),
+      document.getElementById('swipe-impact')
+    ];
+    let current = 0;
+    function updateSwipePages() {
+      // Blur or unblur hero section
+      const hero = document.getElementById('hero-section');
+      if (current !== 0 && hero) hero.classList.add('blurred');
+      else if (hero) hero.classList.remove('blurred');
+      // Swipe page logic
+      for (let i = 1; i < swipePages.length; ++i) {
+        if (!swipePages[i]) continue;
+        swipePages[i].classList.remove('active', 'left', 'right');
+        if (current === i) swipePages[i].classList.add('active');
+        else if (i < current) swipePages[i].classList.add('left');
+        else swipePages[i].classList.add('right');
+      }
+      document.body.style.overflow = (current !== 0) ? "hidden" : "auto";
+    }
+    // Swipe detection (touch & mouse)
+    let startX = 0, startY = 0, isTouch = false, drag = false;
+    function handleSwipeStart(e) {
+      if (e.touches) {
+        isTouch = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      } else {
+        drag = true;
+        startX = e.clientX;
+        startY = e.clientY;
+      }
+    }
+    function handleSwipeEnd(e) {
+      let endX, endY;
+      if (isTouch && e.changedTouches) {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+      } else if (drag) {
+        endX = e.clientX;
+        endY = e.clientY;
+      } else {
+        return;
+      }
+      const dx = endX - startX;
+      const dy = endY - startY;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+        // Main → Mission → Impact
+        if (dx < 0 && current < swipePages.length - 1) {
+          current++;
+          updateSwipePages();
+        } else if (dx > 0 && current > 0) {
+          current--;
+          updateSwipePages();
+        }
+      }
+      isTouch = false;
+      drag = false;
+    }
+    for (let i = 1; i < swipePages.length; ++i) {
+      if (!swipePages[i]) continue;
+      swipePages[i].addEventListener('touchstart', handleSwipeStart, {passive:true});
+      swipePages[i].addEventListener('touchend', handleSwipeEnd, {passive:true});
+      swipePages[i].addEventListener('mousedown', handleSwipeStart);
+      swipePages[i].addEventListener('mouseup', handleSwipeEnd);
+    }
+    // Also allow swiping from the hero section to open Mission
+    document.getElementById('hero-section').addEventListener('touchstart', handleSwipeStart, {passive:true});
+    document.getElementById('hero-section').addEventListener('touchend', function(e) {
+      let endX = e.changedTouches[0].clientX;
+      if (endX - startX < -60 && current === 0) { current = 1; updateSwipePages(); }
+    }, {passive:true});
+    document.getElementById('hero-section').addEventListener('mousedown', handleSwipeStart);
+    document.getElementById('hero-section').addEventListener('mouseup', function(e) {
+      if (e.clientX - startX < -60 && current === 0) { current = 1; updateSwipePages(); }
+    });
+    // Keyboard navigation
+    window.addEventListener('keydown', function(e) {
+      if (e.key === "ArrowLeft" && current > 0) { current--; updateSwipePages(); }
+      if (e.key === "ArrowRight" && current < swipePages.length-1) { current++; updateSwipePages(); }
+      if (e.key === "Escape") { current=0; updateSwipePages(); }
+    });
+    // On load, ensure main page is shown and scroll is enabled
+    updateSwipePages();
+  </script>
+</body>
+</html>
