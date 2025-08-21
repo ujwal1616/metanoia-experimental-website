@@ -47,13 +47,24 @@ Expect changes as I keep testing and improving.
 ---
 
 ## 📸 Demo
-👉 [Live Website](your-live-link-here) *(link will work after publishing with GitHub Pages)*  
+👉 [Live Website](https://ujwal1616.github.io/metanoia-experimental-website/)  
 
 ---
 
 ## 📥 Run Locally
 1. Clone this repo:  
    ```bash
-   git clone https://github.com/<your-username>/metanoia-experimental-website.git
+   git clone https://github.com/ujwal1616/metanoia-experimental-website.git
+
+---
+
+## ⚡ Behind the Project
+This experimental website was **designed and structured by me** — including the idea, features, site flow, hidden swipe navigation, and animations.  
+
+Since I’m still learning to code, I used **AI coding tools** to help generate the HTML, CSS, and JavaScript.  
+The creative direction, product thinking, and design decisions are mine.  
+
+The focus here is on **turning an idea into something real and testable**, while I continue building my coding skills step by step.  
+
 
 
