@@ -64,7 +64,7 @@ This experimental website was **designed and structured by me** — including th
 Since I’m still learning to code, I used **AI coding tools** to help generate the HTML, CSS, and JavaScript.  
 The creative direction, product thinking, and design decisions are mine.  
 
-The focus here is on **turning an idea into something real and testable**, while I continue building my coding skills step by step.  
+The focus here is on **turning an idea into something real and testable**, while I continue building my coding skills step by step via experimenting and implementing.  
 
 
 
