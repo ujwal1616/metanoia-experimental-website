@@ -15,7 +15,7 @@ It’s not the final product — just a working concept to show how the app migh
   - Swipe right → Back to previous page  
   - Works with keyboard arrows too (← → Esc)  
 -  Loading animation with glowing Metanoia text  
--  Responsive design + smooth transitions and animations  
+-  Responsive design + smooth transitions and animations   
 
 ---
 
